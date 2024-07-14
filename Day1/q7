@@ -1,0 +1,19 @@
+class Solution {
+public:
+    int subarraySum(vector<int>& nums, int k) {
+        unordered_map<int,int>st;
+        int sum=0;
+        int ans=0;
+        st[0]=1;
+        for(auto it:nums)
+        {
+            sum+=it;
+            if(st.find(sum-k)!=st.end())
+            {
+                ans+=st[sum-k];
+            }
+            st[sum]++;
+        }
+        return ans;
+    }
+};
