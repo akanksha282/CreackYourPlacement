@@ -1,0 +1,29 @@
+Sort colors:
+We will maintain two variable one for zero and other for two, whenever we encounter zero we increase left varibale and swap it same goes for the right variable which is for 2
+by doing we get all 0 at left of array and all 2 at right and automatically all 1 will come in middle
+class Solution {
+public:
+    void sortColors(vector<int>& nums) {
+       int left=0,mid=0,right=nums.size()-1;
+       int curr=0;
+       while(curr<=right)
+       {
+        if(nums[curr]==0)
+        {
+            swap(nums[left],nums[curr]);
+            left++;
+            curr++;
+        }
+        else if(nums[curr]==2)
+        {
+            swap(nums[curr],nums[right]);
+            right--;
+            curr++;
+        }
+        else
+        {
+             curr++;
+        }
+       }
+    }
+};
