@@ -1,0 +1,24 @@
+recursion would lead to tle,it is alway we are either picking all elmemt from starting or ending or some from starting and rest fromend 
+therefor we can use concept of prefix.
+
+
+
+class Solution {
+public:
+    int maxScore(vector<int>& cardPoints, int k) {
+         int n=cardPoints.size();
+         vector<int>start(k+1,0),end(k+1,0);
+         for(int i=0;i<k;i++)
+         {
+            start[i+1]=cardPoints[i]+start[i];
+            end[i+1]=cardPoints[n-i-1]+end[i];
+         }
+         int maxscore=0;
+         for(int i=0;i<=k;i++)
+         {
+             int ans=start[i]+end[k-i];
+             maxscore=max(maxscore,ans);
+         }
+         return maxscore;
+    }
+};
