@@ -1,0 +1,44 @@
+class Solution {
+public:
+    bool exist(vector<vector<char>>& board, string word) {
+        int n=word.size();
+        int r=board.size(),c=board[0].size();
+        for(int i=0;i<r;i++)
+        {
+            for(int j=0;j<c;j++)
+            {
+                if(board[i][j]==word[0])
+                {
+                    vector<vector<bool>>vis(r,vector<bool>(c,false));
+                    if(check(board,i,j,word,0,vis)==true)
+                    {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+    bool check(vector<vector<char>>&board,int r,int j,string& word,int idx,vector<vector<bool>>&vis)
+    {
+        if(idx==word.size())
+        {
+            return true;
+        }
+        if(r<0 || j<0 || r>=board.size() || j>=board[0].size() ||
+         board[r][j]!=word[idx] || vis[r][j]==true)
+         {
+            return false;
+         }
+    
+         vis[r][j]=true;
+         bool l=check(board,r+1,j,word,idx+1,vis);
+         bool t=check(board,r-1,j,word,idx+1,vis);
+         bool u=check(board,r,j-1,word,idx+1,vis);
+         bool q=check(board,r,j+1,word,idx+1,vis);
+         vis[r][j]=false;
+         return (l || t|| u || q);
+        
+    }
+
+};
