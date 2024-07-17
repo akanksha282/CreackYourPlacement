@@ -1,0 +1,49 @@
+similar to largets areea of rect
+class Solution{
+  public:
+    int maxArea(int M[MAX][MAX], int n, int m) {
+       vector<int>height(m);
+       for(int i=0;i<m;i++)
+       {
+           height[i]=M[0][i];
+       }
+       int ans=maxarea(height);
+       for(int j=1;j<n;j++)
+       {
+           for(int k=0;k<m;k++)
+           {
+               height[k]=(M[j][k]==0)?0:1+height[k];
+               
+           }
+           ans=max(ans,maxarea(height));
+       }
+       return ans;
+       
+    }
+    int maxarea(vector<int>height)
+    {
+        stack<int>st;
+        st.push(-1);
+        int ans=0;
+        int n=height.size();
+        for(int i=0;i<height.size();i++)
+        {
+            while(st.top()!=-1 && height[st.top()]>=height[i])
+            {
+                int l=st.top();
+                st.pop();
+                int w=i-st.top()-1;
+                ans=max(ans,w*height[l]);
+            }
+            st.push(i);
+        }
+       while(st.top()!=-1)
+        {
+            int curr=height[st.top()];
+            st.pop();
+            int w=n-st.top()-1;
+            ans=max(ans,w*curr);
+        }
+        return ans;
+    }
+};
