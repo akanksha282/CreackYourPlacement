@@ -1,0 +1,31 @@
+// using stack
+class Solution {
+public:
+vector<string>ans;
+    vector<string> generateParenthesis(int n) {
+        helper(n,1,0,"(");
+        return ans;
+    }
+    void helper(int n,int p,int c,string res)
+    {
+        if(2*n==res.size())
+        {
+            ans.push_back(res);
+            return;
+        }
+        if(p<n)
+        {
+            res.push_back('(');
+            helper(n,p+1,c,res);
+            res.pop_back();
+        }
+        if(c<p)
+        {
+            res.push_back(')');
+            helper(n,p,c+1,res);
+            res.pop_back();
+        }
+        // return;
+    }
+
+};
