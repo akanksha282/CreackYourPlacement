@@ -1,0 +1,47 @@
+//of all the characters of string p.
+    string smallestWindow (string s, string p)
+    {
+        string ans="";
+        int j=0;
+        vector<int>freq(26,0);
+           vector<int>prev(26,0);
+           int len=INT_MAX;
+        for(auto it:p)
+        {
+            // freq[it-'a']+=1;
+             prev[it-'a']+=1;
+        }
+        int cnt=0,n=p.size();
+        for(int i=0;i<s.size();i++)
+        {
+            if(prev[s[i]-'a']>0)
+            {
+                freq[s[i]-'a']+=1;
+                if(freq[s[i]-'a']<=prev[s[i]-'a'])
+                {
+                    cnt++;
+                }
+            }
+             
+                while(cnt==n)
+                {
+                  if(len>(i-j+1))
+                  {
+                      len=i-j+1;
+                      ans=s.substr(j,len);
+                  }
+                  if(prev[s[j]-'a']>0)
+                  {
+                      freq[s[j]-'a']--;
+                      if(freq[s[j]-'a']<prev[s[j]-'a'])
+                      {
+                          cnt--;
+                      }
+                  }
+                  j++;
+                    
+                }
+            
+        }
+        return (ans.empty())?"-1":ans;
+    }
