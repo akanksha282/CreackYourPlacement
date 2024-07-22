@@ -1,0 +1,26 @@
+class Solution{
+public:
+    Node* divide(int N, Node *head){
+       Node* even=new Node(0);
+       Node* ev=even;
+       Node* odd=new Node(0);
+       Node* os=odd,*oe=NULL;
+       while(head!=NULL)
+       {
+           if(head->data%2==0)
+           {
+               ev->next=new Node(head->data);
+               ev=ev->next;
+           }
+           else
+           {
+               os->next=new Node(head->data);
+               os=os->next;
+           }
+           head=head->next;
+       }
+       os->next=NULL;
+       ev->next=odd->next;
+       return even->next;
+    }
+};
