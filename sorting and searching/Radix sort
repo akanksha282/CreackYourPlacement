@@ -1,0 +1,36 @@
+
+
+ void bucketSort(int arr[], int placeValue,int n) {
+        vector<vector<int>> buckets(10, vector<int>());
+        
+          for (int i=0;i<n;i++) 
+           {
+            int digit = arr[i] / placeValue;
+            digit = digit % 10;
+            buckets[digit].push_back(arr[i]);
+        }
+        int index = 0;
+        for (int digit = 0; digit < 10; ++digit) {
+            for (int& val : buckets[digit]) {
+                arr[index] = val;
+                index++;
+            }
+        }
+    }
+void radixSort(int arr[], int n) 
+{ 
+   int maxElement = arr[0];
+        for (int i=0;i<n;i++) {
+            maxElement = max(arr[i], maxElement);
+        }
+        int maxDigits = 0;
+        while (maxElement > 0) {
+            maxDigits += 1;
+            maxElement /= 10;
+        }
+          int placeValue = 1;
+        for (int digit = 0; digit < maxDigits; ++digit) {
+            bucketSort(arr, placeValue,n);
+            placeValue *= 10;
+        }
+} 
