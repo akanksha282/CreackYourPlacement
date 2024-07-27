@@ -1,0 +1,53 @@
+int evaluatePostfix(string S)
+    {
+        stack<int>st;
+        for(auto it:S)
+        {
+            if(isdigit(it))
+            {
+                st.push(it-'0');
+            }
+            else
+            {
+                if(it=='*')
+                {
+                    int ch=st.top();
+                    st.pop();
+                    int ch1=st.top();
+                    st.pop();
+                    int ch2=(ch*ch1);
+                    st.push(ch2);
+                }
+                else if(it=='+')
+                {
+                    int ch=st.top();
+                    st.pop();
+                    int ch1=st.top();
+                    st.pop();
+                    int ch2=(ch+ch1);
+                    st.push(ch2);
+                }
+                else if(it=='-')
+                {
+                    int ch=st.top();
+                    st.pop();
+                    int ch1=st.top();
+                    st.pop();
+                    int ch2=(ch1-ch);
+                    st.push(ch2);
+                }
+                else if(it=='/')
+                {
+                    int ch=st.top();
+                    st.pop();
+                    int ch1=st.top();
+                    st.pop();
+                    int r=ch1/ch;
+                  
+                    st.push(r);
+                }
+            }
+        }
+        int ans=st.top();
+        return ans;
+    }
