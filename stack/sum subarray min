@@ -1,0 +1,26 @@
+class Solution {
+public:
+    int sumSubarrayMins(vector<int>& arr) {
+        int ans=0;
+        stack<int>st;
+        int mod=1e9+7;
+     
+        for(int i=0;i<=arr.size();i++)
+        {
+            while(!st.empty() && (i==arr.size() ||arr[i]<=arr[st.top()]))
+            {
+                int mid=st.top();
+                st.pop();
+                int l=(st.empty())?-1:st.top();
+                int r=i;
+                int sub=((mid-l)*(r-mid))%mod;
+                ans+=(sub*arr[mid])%mod;
+            }
+            st.push(i);
+        }
+        return ans;
+    }
+};
+
+// instand of finding all subarray then min what we can do is that we focus on each element and check if the range for whic that elemment is smallest ones we have range 
+we can find number of subaray in that range 
