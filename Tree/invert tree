@@ -1,0 +1,26 @@
+// go down and start reversing
+class Solution {
+public:
+    TreeNode* invertTree(TreeNode* root) {
+        if(root==NULL)
+        {
+            return NULL;
+        }
+        return helper(root);
+    }
+    TreeNode* helper(TreeNode* root)
+    {
+        if(root==NULL)
+        {
+            return NULL;
+        }
+        helper(root->left);
+        helper(root->right);
+        TreeNode* right=root->left;
+        root->left=root->right;
+        root->right=right;
+        return root;
+
+    }
+
+};
