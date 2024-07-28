@@ -1,0 +1,27 @@
+class Solution {
+public:
+int ans=0;
+    int rangeSumBST(TreeNode* root, int low, int high) {
+        helper(root,low,high);
+        return ans;
+    }
+    void helper(TreeNode* root,int low,int high)
+    {
+        if(root==NULL)
+        {
+            return ;
+        }
+        if(root->val>=low && root->val<=high)
+        {
+            ans+=root->val;
+        }
+        if(root->val>low)
+        {
+            helper(root->left,low,high);
+        }
+        if(root->val<high)
+        {
+            helper(root->right,low,high);
+        }
+    }
+};
