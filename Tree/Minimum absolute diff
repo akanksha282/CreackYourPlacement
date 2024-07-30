@@ -1,0 +1,23 @@
+class Solution {
+public:
+TreeNode* prev;
+    int getMinimumDifference(TreeNode* root) {
+        int ans=INT_MAX;
+        helper(root,ans);
+        return ans;
+    }
+    void helper(TreeNode* root,int& ans)
+    {
+        if(root==NULL)
+        {
+            return;
+        }
+         helper(root->left,ans);
+        if(prev!=NULL)
+        {
+            ans=min(ans,abs(root->val-prev->val));
+        }
+        prev=root;
+        helper(root->right,ans);
+    }
+};
