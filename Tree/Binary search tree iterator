@@ -1,0 +1,29 @@
+class BSTIterator {
+public:
+vector<int>inorder;
+int ind=-1;
+    BSTIterator(TreeNode* root) {
+       inordered(root);   
+    }
+    void inordered(TreeNode* root)
+    {
+        if(root==NULL)
+        {
+            return;
+        }
+        inordered(root->left);
+        inorder.push_back(root->val);
+        inordered(root->right);
+    }
+    
+    int next() {
+        return inorder[++ind];
+        
+    }
+    
+    bool hasNext() {
+
+       return ind+1<inorder.size();
+        
+    }
+};
