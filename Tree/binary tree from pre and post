@@ -1,0 +1,18 @@
+class Solution {
+public:
+int postidx=0,preidx=0;
+    TreeNode* constructFromPrePost(vector<int>& preorder, vector<int>& postorder) {
+        TreeNode* root=new TreeNode(preorder[preidx++]);
+        if(root->val!=postorder[postidx])
+        {
+            root->left=constructFromPrePost(preorder,postorder);
+        }
+        if(root->val!=postorder[postidx])
+        {
+              root->right=constructFromPrePost(preorder,postorder);
+        }
+        postidx++;
+        return root;
+        
+    }
+};
