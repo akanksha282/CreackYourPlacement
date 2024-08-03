@@ -1,0 +1,27 @@
+class Solution{
+public:
+    int getCount(Node *root, int l, int h)
+    {
+      queue<Node*>q;
+      q.push(root);
+      int ans=0;
+      while(!q.empty())
+      {
+           Node* curr=q.front();
+           q.pop();
+           if(curr->data>=l && curr->data<=h)
+           {
+               ans++;
+           }
+           if(curr->left!=NULL)
+           {
+               q.push(curr->left);
+           }
+           if(curr->right!=NULL)
+           {
+               q.push(curr->right);
+           }
+      }
+      return ans;
+    }
+};
