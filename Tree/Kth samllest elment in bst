@@ -1,0 +1,23 @@
+class Solution {
+public:
+void helper(TreeNode* root,int k,int &i,int& ans)
+{
+    if(root==NULL)
+    {
+        return;
+    }
+    helper(root->left,k,i,ans);
+    i++;
+    if(i==k)
+    {
+        ans= root->val;
+        return;
+    }
+  helper(root->right,k,i,ans);
+}
+    int kthSmallest(TreeNode* root, int k) {
+        int i=0,ans=0;
+    helper(root,k,i,ans);
+    return ans;
+    }
+};
