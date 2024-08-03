@@ -1,0 +1,61 @@
+class Solution{
+    public:
+    /* Should return minimum distance between a and b
+    in a tree with given root*/
+    Node* findlca(Node* root,int a ,int b)
+    {
+        if(root==NULL)
+        {
+            return NULL;
+        }
+        if(root->data==a || root->data==b)
+        {
+            return root;
+        }
+        Node* l=findlca(root->left,a,b);
+        Node* r=findlca(root->right,a,b);
+        if(l!=NULL && r!=NULL)
+        {
+            return root;
+        }
+        return (l==NULL)?r:l;
+    }
+    int helper(Node* lca,int a)
+    {
+        if(a==lca->data)
+        {
+            return 0;
+        }
+        queue<Node*>q;
+        q.push(lca);
+        int res=0;
+        while(!q.empty())
+        {
+            int n=q.size();
+            for(int i=0;i<n;i++)
+            {
+                Node* curr=q.front();
+                q.pop();
+                if(curr->data==a)
+                {
+                    return res;
+                }
+                if(curr->left!=NULL)
+                {
+                    q.push(curr->left);
+                }
+                if(curr->right!=NULL)
+                {
+                    q.push(curr->right);
+                }
+            }
+            res++;
+        }
+        return res;
+    }
+    int findDist(Node* root, int a, int b) {
+        Node* lca=findlca(root,a,b);
+        int dist=helper(lca,a)+helper(lca,b);
+        return dist;
+    }
+};
